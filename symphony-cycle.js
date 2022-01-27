@@ -329,19 +329,19 @@ document.addEventListener('alpine:init', () => {
     	return this.currencyFormat().format(amount);
     },
     totalSavings() {
-      if (!this.buildingValues) {
+      if (!this.buildingValues()) {
         return 0;
       }
-      console.log(this.buildingValues);
-    	return this.buildingValues.reduce(function(prev,current) {
+      console.log(this.buildingValues());
+    	return this.buildingValues().reduce(function(prev,current) {
       	return prev + Number(current.estimated_savings);
       }, 0);
     },
     totalCost() {
-      if (!this.buildingValues) {
+      if (!this.buildingValues()) {
         return 0;
       }
-    	return this.buildingValues.reduce(function(prev,current) {
+    	return this.buildingValues().reduce(function(prev,current) {
       	return prev + Number(current.license_cost);
       }, 0);
     },
@@ -352,10 +352,10 @@ document.addEventListener('alpine:init', () => {
       return prefix;
     },
     getLicenses(callback) {
-      if (!this.buildingValues) {
+      if (!this.buildingValues()) {
         return;
       }
-      
+
     	var data = {
         "client_company": this.client_company,
         "client_address_1": this.client_country,
@@ -369,7 +369,7 @@ document.addEventListener('alpine:init', () => {
         "buildings": []        
       };
       
-      this.buildingValues.forEach(function(building){
+      this.buildingValues().forEach(function(building){
       	var b = {
           "uid": building.uid,
           "name": "Headquarters",
