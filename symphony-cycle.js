@@ -273,16 +273,17 @@ document.addEventListener('alpine:init', () => {
         
       this.buildings[index][key].valid = isValid;
       this.buildings[index][key].error = errorMsg;
-      
-      console.log('validateBuildingField', key, this.buildings[index][key]);
     },
     buildingHasErrors(building) {
+      console.log('buildingHasErrors', building);
       var errors = Object.keys(building).filter(function(key){
         if (typeof building[key] !== 'object') {
           return false;
         }
         return ! building[key].valid;
       });
+
+      console.log('errors', errors);
       
       if (errors.length > 0) {
         return true;
