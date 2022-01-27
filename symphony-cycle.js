@@ -332,6 +332,7 @@ document.addEventListener('alpine:init', () => {
       if (!this.buildingValues) {
         return 0;
       }
+      console.log(this.buildingValues);
     	return this.buildingValues.reduce(function(prev,current) {
       	return prev + Number(current.estimated_savings);
       }, 0);
@@ -351,6 +352,10 @@ document.addEventListener('alpine:init', () => {
       return prefix;
     },
     getLicenses(callback) {
+      if (!this.buildingValues) {
+        return;
+      }
+      
     	var data = {
         "client_company": this.client_company,
         "client_address_1": this.client_country,
