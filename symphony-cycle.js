@@ -2,6 +2,12 @@
 var buildingObj = {
   open: false,
   uid: null,
+  name: {
+    value: "",
+    rules: ['required'],
+    valid: true,
+    error: null
+  },
   address1: {
     value: "",
     rules: ['required'],
@@ -372,7 +378,7 @@ document.addEventListener('alpine:init', () => {
       this.buildingValues().forEach(function(building){
       	var b = {
           "uid": building.uid,
-          "name": "Headquarters",
+          "name": building.name,
           "address": {
             "country": building.country,
             "address": building.address1 + ' ' + building.address2,
