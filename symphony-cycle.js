@@ -277,7 +277,7 @@ document.addEventListener('alpine:init', () => {
     buildingHasErrors(building) {
       console.log('buildingHasErrors', building);
       var errors = Object.keys(building).filter(function(key){
-        if (typeof building[key] !== 'object') {
+        if (typeof building[key] !== 'object' || building[key].valid === undefined) {
           return false;
         }
         return ! building[key].valid;
