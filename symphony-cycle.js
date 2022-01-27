@@ -302,7 +302,10 @@ document.addEventListener('alpine:init', () => {
     	if(this.buildings.length) {
       	return this.buildings.map(function(building){
         	var b = {};
-        	Object.keys(building).forEach(function(key){
+          Object.keys(building).forEach(function (key) {
+            if (key === 'open') {
+              return;
+            }
             if (key === 'uid') {
 	            b.uid = building.uid;
             } else {
@@ -313,6 +316,8 @@ document.addEventListener('alpine:init', () => {
           return b;
         })
       }
+
+      return null;
     },
     toggle(index) {
       this.buildings[index].open = !this.buildings[index].open;
@@ -324,11 +329,17 @@ document.addEventListener('alpine:init', () => {
     	return this.currencyFormat().format(amount);
     },
     totalSavings() {
+      if (!this.buildingValues) {
+        return 0;
+      }
     	return this.buildingValues.reduce(function(prev,current) {
       	return prev + Number(current.estimated_savings);
       }, 0);
     },
     totalCost() {
+      if (!this.buildingValues) {
+        return 0;
+      }
     	return this.buildingValues.reduce(function(prev,current) {
       	return prev + Number(current.license_cost);
       }, 0);
