@@ -3,13 +3,13 @@ var buildingObj = {
   open: false,
   uid: null,
   address1: {
-    value: null,
+    value: "",
     rules: ['required'],
     valid: true,
     error: null
   },
   address2: {
-    value: null,
+    value: "",
     rules: null,
     valid: true,
     error: null
