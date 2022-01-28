@@ -70,7 +70,7 @@ var buildingObj = {
   },
   cooling: {
     value: 'yes',
-    rules: ['required'],
+    rules: null,
     valid: true,
     error: null
   },
@@ -300,6 +300,7 @@ document.addEventListener('alpine:init', () => {
         console.log('hasErrors', hasErrors);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
           console.log('hasEmptyFields', key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
+          console.log(typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '');
           return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
         });
 
