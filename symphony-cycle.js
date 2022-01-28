@@ -21,7 +21,7 @@ var buildingObj = {
     error: null
   },
   country: {
-    value: null,
+    value: 'Ireland',
     rules: null,
     valid: true,
     error: null
@@ -297,7 +297,7 @@ document.addEventListener('alpine:init', () => {
       var invalid = this.buildings.filter(function(building) {
         var hasErrors = self.buildingHasErrors(building);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
-          return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].value && building[key].value !== '';
+          return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
         }).length > 0;
 
         return hasErrors || hasEmptyFields;
