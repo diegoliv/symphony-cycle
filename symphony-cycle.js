@@ -298,9 +298,11 @@ document.addEventListener('alpine:init', () => {
         var hasErrors = self.buildingHasErrors(building);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
           return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
-        }).length > 0;
+        });
 
-        return hasErrors || hasEmptyFields;
+        console.log( 'hasEmptyFields', hasEmptyFields);
+
+        return hasErrors || hasEmptyFields.length > 0;
       });
       
       if (invalid.length > 0) {
