@@ -39,7 +39,7 @@ var buildingObj = {
     error: null
   },
   type: {
-    value: null,
+    value: 'office',
     rules: null,
     valid: true,
     error: null
@@ -63,7 +63,7 @@ var buildingObj = {
     error: null
   },
   area_unit: {
-    value: null,
+    value: 'm2',
     rules: null,
     valid: true,
     error: null
@@ -395,6 +395,7 @@ document.addEventListener('alpine:init', () => {
             "days_operation": building.days_operation,
             "hours_operation": building.hours_operation,
             "area": building.area,
+            "area_unit": building.area_unit,
             "unit_price_electricity": building.unit_price_electricity,
             "unit_price_heating": building.unit_price_heating,
             "cooling": building.cooling === 'yes'
