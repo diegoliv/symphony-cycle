@@ -294,9 +294,12 @@ document.addEventListener('alpine:init', () => {
       }
       
       var self = this;
-      var invalid = this.buildings.filter(function(building) {
+      var invalid = this.buildings.filter(function (building) {
+        console.log('someBuildingsAreInvalid', building);
         var hasErrors = self.buildingHasErrors(building);
+        console.log('hasErrors', hasErrors);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
+          console.log('hasEmptyFields', key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
           return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
         });
 
