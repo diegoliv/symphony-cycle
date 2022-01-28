@@ -275,7 +275,6 @@ document.addEventListener('alpine:init', () => {
       this.buildings[index][key].error = errorMsg;
     },
     buildingHasErrors(building) {
-      console.log('buildingHasErrors', building);
       var errors = Object.keys(building).filter(function(key){
         if (typeof building[key] !== 'object' || building[key].valid === undefined) {
           return false;
@@ -296,7 +295,12 @@ document.addEventListener('alpine:init', () => {
       
       var self = this;
       var invalid = this.buildings.filter(function(building) {
-        return self.buildingHasErrors(building);
+        var hasErrors = self.buildingHasErrors(building);
+        var hasEmptyFields = Object.keys(building).filter(function (key) {
+          return typeof building[key] === 'object' && building[key].valid !== undefined && ( building[key].value === '' || building[key].value === null );
+        }).length > 0;
+
+        return hasErrors || hasEmptyFields;
       });
       
       if (invalid.length > 0) {
