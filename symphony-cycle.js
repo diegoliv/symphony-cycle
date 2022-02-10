@@ -290,6 +290,8 @@ document.addEventListener('alpine:init', () => {
       if (errors.length > 0) {
         return true;
       }
+
+      return false;
     },
     someBuildingsAreInvalid(){
       if (this.buildings.length === 0) {
@@ -303,15 +305,19 @@ document.addEventListener('alpine:init', () => {
         console.log('hasErrors', hasErrors);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
           console.group('hasEmptyFields')
-          console.log( key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
-          console.log("typeof building[key] === 'object'", typeof building[key] === 'object')
-          console.log("building[key].valid !== undefined", building[key].valid !== undefined);
-          console.log("building[key].rules", building[key].rules);
-          console.log("building[key].value", building[key].value);
-          console.log("building[key].value !== ''", building[key].value !== '');
-          console.log(typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '');
+          console.log( typeof building[key] !== 'object' || typeof building[key].rules === 'undefined' || typeof building[key].valid === 'undefined');
+          console.log( !building[key].value || building[key].value === '');
           console.groupEnd();
-          return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
+          // If field is not an object, or doesn't have rules, return false.
+          if (typeof building[key] !== 'object' || typeof building[key].rules === 'undefined' || typeof building[key].valid === 'undefined') {
+            return false;
+          }
+          // If the field does have rules, but is empty, return true.
+          if (!building[key].value || building[key].value === '') {
+            return true;
+          }
+
+          return false;
         });
 
         console.log( 'hasEmptyFields', hasEmptyFields);
