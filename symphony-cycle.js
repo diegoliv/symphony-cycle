@@ -16,9 +16,6 @@ var buildingObj = {
   },
   address2: {
     value: "",
-    rules: null,
-    valid: true,
-    error: null
   },
   country: {
     value: 'Ireland',
