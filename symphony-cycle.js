@@ -299,12 +299,7 @@ document.addEventListener('alpine:init', () => {
       var invalid = this.buildings.filter(function (building) {
         console.log('someBuildingsAreInvalid', building);
         var hasErrors = self.buildingHasErrors(building);
-        console.log('hasErrors', hasErrors);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
-          console.group('hasEmptyFields')
-          console.log( typeof building[key] !== 'object' || typeof building[key].rules === 'undefined' || typeof building[key].valid === 'undefined');
-          console.log( !building[key].value || building[key].value === '');
-          console.groupEnd();
           // If field is not an object, or doesn't have rules, return false.
           if (typeof building[key] !== 'object' || typeof building[key].rules === 'undefined' || typeof building[key].valid === 'undefined') {
             return false;
@@ -316,8 +311,6 @@ document.addEventListener('alpine:init', () => {
 
           return false;
         });
-
-        console.log( 'hasEmptyFields', hasEmptyFields);
 
         return hasErrors || hasEmptyFields.length > 0;
       });
