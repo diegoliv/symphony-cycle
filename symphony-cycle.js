@@ -304,6 +304,11 @@ document.addEventListener('alpine:init', () => {
         var hasEmptyFields = Object.keys(building).filter(function (key) {
           console.group('hasEmptyFields')
           console.log( key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
+          console.log("typeof building[key] === 'object'", typeof building[key] === 'object')
+          console.log("building[key].valid !== undefined", building[key].valid !== undefined);
+          console.log("building[key].rules", building[key].rules);
+          console.log("building[key].value", building[key].value);
+          console.log("building[key].value !== ''", building[key].value !== '');
           console.log(typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '');
           console.groupEnd();
           return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
