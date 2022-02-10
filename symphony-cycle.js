@@ -116,7 +116,7 @@ document.addEventListener('alpine:init', () => {
     client_email: null,
     client_representative_first: null,
     client_representative_last: null,
-    client_buildings_num: 1,
+    client_buildings_num: 0,
     agreement_checked: false,
     fullName() {
     	return this.client_representative_first + ' ' + this.client_representative_last;
@@ -227,7 +227,10 @@ document.addEventListener('alpine:init', () => {
     },
     nextStep() {
     	if (this.stepIndex < this.steps.length - 1 && this.currentStep().valid) {
-      	if (this.stepIndex === 6) {
+        if (this.stepIndex === 6) {
+          if (this.someBuildingsAreInvalid()) {
+            return;
+          }        
         }
 	    	this.stepIndex++;
   		}
@@ -299,8 +302,10 @@ document.addEventListener('alpine:init', () => {
         var hasErrors = self.buildingHasErrors(building);
         console.log('hasErrors', hasErrors);
         var hasEmptyFields = Object.keys(building).filter(function (key) {
-          console.log('hasEmptyFields', key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
+          console.group('hasEmptyFields')
+          console.log( key, building[key], typeof building[key], building[key].valid !== undefined, building[key].rules, building[key].value, building[key].value !== '');
           console.log(typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '');
+          console.groupEnd();
           return typeof building[key] === 'object' && building[key].valid !== undefined && building[key].rules && building[key].value && building[key].value !== '';
         });
 
