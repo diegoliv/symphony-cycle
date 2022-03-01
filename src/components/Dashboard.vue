@@ -1,5 +1,6 @@
 <template>
   <main class="cycle-dashboard pt-6">
+    <icon-library />
     <div class="container max-w-7xl mx-auto">      
       <div class="cycle-dashboard-grid mt-14 grid grid-cols-12 gap-6">
         <navigation></navigation>
@@ -14,11 +15,13 @@
 
 <script>
 import Navigation from '@/components/Navigation'
+import IconLibrary from '@/components/IconLibrary'
 
 export default {
   name: "UserDashboard",
   components: {
-    Navigation
+    Navigation,
+    IconLibrary
   }
 }
 </script>
