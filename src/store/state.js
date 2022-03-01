@@ -1,4 +1,5 @@
 export default {
-  // The current user
   user: null,
+  token: localStorage.getItem("sc_token") || null,
+  uid: localStorage.getItem("sc_uid") || null,
 }

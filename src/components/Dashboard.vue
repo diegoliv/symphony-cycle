@@ -1,11 +1,24 @@
 <template>
-  <div id="app" class="bg-gray-50">
-    <h1>Welcome!</h1>
-  </div>
+  <main class="cycle-dashboard pt-6">
+    <div class="container max-w-7xl mx-auto">      
+      <div class="cycle-dashboard-grid mt-14 grid grid-cols-12 gap-6">
+        <navigation></navigation>
+        <section class="col-start-4 col-span-6">
+          <router-view></router-view>
+        </section>
+        <aside class="col-span-3"></aside>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation'
+
 export default {
-  name: "UserDashboard"
+  name: "UserDashboard",
+  components: {
+    Navigation
+  }
 }
 </script>
