@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label :for="id" v-if="label">{{ label }}</label>
+    <label :for="id" v-if="label" class="text-secondary mb-2">{{ label }}</label>
     <input
       :id="id"
       :type="type"

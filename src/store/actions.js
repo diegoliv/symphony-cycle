@@ -38,7 +38,34 @@ export default {
       }
 
       api({
-        method: "get",
+        method: 'get',
+        url: `/customer/${uid}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          state.user = response.data.customer
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+
+  updateUser({ state }) {
+    return new Promise((resolve, reject) => {
+      const token = state.token;
+      const uid = state.uid;
+
+      if (!token) {
+        reject("No token found");
+      }
+
+      api({
+        method: 'post',
+        data: state.user,
         url: `/customer/${uid}`,
         headers: {
           Authorization: `Bearer ${token}`
