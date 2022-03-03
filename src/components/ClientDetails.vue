@@ -10,13 +10,28 @@
         title="Personal Information"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et"
       >
-        <button 
-          class="py-3 px-4 text-sm rounded-md shadow border whitespace-nowrap" 
-          :class="personalInfoEditButton.classes" 
-          @click="updatePersonalDetails"
-        >
-          {{ personalInfoEditButton.text }}
-        </button>
+        <template v-if="personalDetailsDisabled">
+          <button 
+            class="py-3 px-4 text-sm leading-3 rounded-md shadow border border-light-grey whitespace-nowrap" 
+            @click="personalDetailsDisabled = false"
+          >
+            Update Details
+          </button>
+        </template>
+        <template v-else>
+          <button 
+            class="py-3 px-4 text-sm leading-3 rounded-md shadow border border-light-grey whitespace-nowrap" 
+            @click="personalDetailsDisabled = true"
+          >
+            Cancel
+          </button>
+          <button 
+            class="py-3 px-4 ml-2 text-sm leading-3 rounded-md shadow border border-green bg-green text-white whitespace-nowrap" 
+            @click="updatePersonalDetails"
+          >
+            {{ savingPersonal ? 'Saving...' : 'Save' }}
+          </button>
+        </template>
       </section-header>
       <div class="grid grid-cols-2 gap-8">
         <input-field :disabled="personalDetailsDisabled" v-model="firstName" label="First Name"></input-field>
@@ -29,13 +44,28 @@
         title="Company Information"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et"
       >
-        <button 
-          class="py-3 px-4 text-sm rounded-md shadow border whitespace-nowrap" 
-          :class="companyInfoEditButton.classes" 
-          @click="updateCompanyDetails"
-        >
-          {{ companyInfoEditButton.text }}
-        </button>
+        <template v-if="companyDetailsDisabled">
+          <button 
+            class="py-3 px-4 text-sm leading-3 rounded-md shadow border border-light-grey whitespace-nowrap" 
+            @click="companyDetailsDisabled = false"
+          >
+            Update Details
+          </button>
+        </template>
+        <template v-else>
+          <button 
+            class="py-3 px-4 text-sm leading-3 rounded-md shadow border border-light-grey whitespace-nowrap" 
+            @click="companyDetailsDisabled = true"
+          >
+            Cancel
+          </button>
+          <button 
+            class="py-3 px-4 ml-2 text-sm leading-3 rounded-md shadow border border-green bg-green text-white whitespace-nowrap" 
+            @click="updateCompanyDetails"
+          >
+            {{ savingCompany ? 'Saving...' : 'Save' }}
+          </button>
+        </template>
       </section-header>
       <div class="grid grid-cols-2 gap-8">
         <div class="col-span-2">
@@ -67,6 +97,8 @@ export default {
     personalDetailsDisabled: true,
     companyDetailsDisabled: true,
     loading: true,
+    savingPersonal: false,
+    savingCompany: false
   }),
   mounted () {
     if (!this.user) {
@@ -128,48 +160,24 @@ export default {
         this.setCompanyAddress2(value)
       }
     },
-    personalInfoEditButton () {
-      if (!this.personalDetailsDisabled) {
-        return {
-          classes: 'border-light-grey bg-green text-white',
-          text: 'Save Details'
-        }
-      }
-      return {
-        classes: 'border-light-grey',
-        text: 'Update Details'
-      }
-    },
-    companyInfoEditButton () {
-      if (!this.companyDetailsDisabled) {
-        return {
-          classes: 'border-light-grey bg-green text-white',
-          text: 'Save Details'
-        }
-      }
-      return {
-        classes: 'border-light-grey',
-        text: 'Update Details'
-      }
-    },
     ...mapState(['user'])
   },
   methods: {
     updatePersonalDetails () {
-      if (!this.personalDetailsDisabled) {
-        this.personalDetailsDisabled = true
-        this.updateUser()
-      } else {
-        this.personalDetailsDisabled = false
-      }
+      this.savingPersonal = true
+      this.updateUser()
+        .then(() => {
+          this.personalDetailsDisabled = true
+          this.savingPersonal = false
+        })
     },
     updateCompanyDetails () {
-      if (!this.companyDetailsDisabled) {
-        this.companyDetailsDisabled = true
-        this.updateUser()
-      } else {
-        this.companyDetailsDisabled = false
-      }
+      this.savingCompany = true
+      this.updateUser()
+        .then(() => {
+          this.companyDetailsDisabled = true
+          this.savingCompany = false
+        })
     },
     ...mapMutations([
       'setFirstName', 

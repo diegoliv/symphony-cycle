@@ -3,6 +3,7 @@ import Login from "@/components/Login"
 import Dashboard from "@/components/Dashboard"
 import Home from "@/components/Home"
 import ClientDetails from "@/components/ClientDetails"
+import BuildingsList from "@/components/Buildings/BuildingsList"
 import store from '@/store'
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
         path: "account",
         name: "Account",
         component: ClientDetails
+      },
+      {
+        path: "buildings",
+        name: "Buildings",
+        component: BuildingsList
       }
     ]
   }

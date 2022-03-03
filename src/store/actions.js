@@ -2,7 +2,7 @@ import api from "@/modules/api";
 import router from "@/router";
 
 export default {
-  loginUser({ state }, credentials) {
+  loginUser({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       api({
         method: "post",
@@ -13,22 +13,26 @@ export default {
         .then(response => {
           localStorage.setItem("sc_token", response.data.customer.accessToken);
           localStorage.setItem("sc_uid", response.data.customer.id);
-          state.user = response.data.customer
-          resolve(response)
+          commit('setUser', response.data.customer);
+          commit('setToken', response.data.customer.accessToken);
+          commit('setUid', response.data.customer.id);
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
+          reject(error);
         })
     })
   },
-  logoutUser({ state }) {
+  logoutUser({ commit }) {
     localStorage.removeItem("sc_token");
     localStorage.removeItem("sc_uid");
-    state.user = null;
+    commit('setUser', null);
+    commit('setToken', null);
+    commit('setUid', null);
     router.push({ name: "Login" })
   },
 
-  getUser({ state }) {
+  getUser({ state, commit }) {
     return new Promise((resolve, reject) => {
       const token = state.token;
       const uid = state.uid;
@@ -45,16 +49,16 @@ export default {
         }
       })
         .then(response => {
-          state.user = response.data.customer
-          resolve(response)
+          commit('setUser', response.data.customer);
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
+          reject(error);
         })
     })
   },
 
-  updateUser({ state }) {
+  updateUser({ state, commit }) {
     return new Promise((resolve, reject) => {
       const token = state.token;
       const uid = state.uid;
@@ -72,24 +76,33 @@ export default {
         }
       })
         .then(response => {
-          state.user = response.data.customer
-          resolve(response)
+          commit('setUser', response.data.customer);
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
+          reject(error);
         })
     })
   },
 
-  getBuildings({ state }) {
+  getBuildings({ state, commit }) {
     return new Promise((resolve, reject) => {
+      const token = state.token;
+
+      if (!token) {
+        reject("No token found");
+      }
+
       api({
         method: "get",
-        url: "/building/all",
-        redirect: 'follow'
+        url: "/building",
+        redirect: 'follow',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
         .then(response => {
-          state.buildings = response.data
+          commit('setBuildings', response.data.building);
           resolve(response)
         })
         .catch(error => {

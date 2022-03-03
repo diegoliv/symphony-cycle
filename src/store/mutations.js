@@ -1,4 +1,13 @@
 export default {
+  setUser(state, user) {
+    state.user = user;
+  },
+  setToken(state, token) {
+    state.token = token;
+  },
+  setUid(state, uid) {
+    state.uid = uid;
+  },
   setFirstName(state, firstName) {
     let name = state.user.representative_name.split(' ');
     name[0] = firstName;
@@ -22,5 +31,8 @@ export default {
   },
   setCompanyAddress2(state, companyAddress2) {
     state.user.address2 = companyAddress2;
+  },
+  setBuildings(state, buildings) {
+    state.buildings = buildings;
   }
 }

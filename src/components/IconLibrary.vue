@@ -4,7 +4,9 @@
     <icon-billing />
     <icon-building />
     <icon-energy />
+    <icon-edit />
     <icon-home />
+    <icon-location />
     <icon-notifications />
     <icon-support />
   </svg>
@@ -15,7 +17,9 @@ import IconAccount from '@/components/Icons/IconAccount'
 import IconBilling from '@/components/Icons/IconBilling'
 import IconBuilding from '@/components/Icons/IconBuilding'
 import IconEnergy from '@/components/Icons/IconEnergy'
+import IconEdit from '@/components/Icons/IconEdit'
 import IconHome from '@/components/Icons/IconHome'
+import IconLocation from '@/components/Icons/IconLocation'
 import IconNotifications from '@/components/Icons/IconNotifications'
 import IconSupport from '@/components/Icons/IconSupport'
 
@@ -26,7 +30,9 @@ export default {
     IconBilling,
     IconBuilding,
     IconEnergy,
+    IconEdit,
     IconHome,
+    IconLocation,
     IconNotifications,
     IconSupport
   },
