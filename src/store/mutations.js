@@ -34,5 +34,15 @@ export default {
   },
   setBuildings(state, buildings) {
     state.buildings = buildings;
+  },
+  setCurrentBuilding(state, building) {
+    state.currentBuilding = building;
+  },
+  setBuildingProp(state, { prop, value }) {
+    state.currentBuilding[prop] = value;
+  },
+  refreshBuilding(state, building) {
+    const index = state.buildings.findIndex(b => b.id === building.id);
+    state.buildings.splice(index, 1, building);
   }
 }

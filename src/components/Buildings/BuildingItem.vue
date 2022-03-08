@@ -10,6 +10,7 @@
       <p class="font-light">
         {{ fullAddress }}
       </p>
+      <p class="mt-2 text-sm opacity-50">License: {{ building.id }}</p>
     </div>
     <button 
       class="py-2 px-4 flex items-center ml-auto text-sm leading-3 rounded-md shadow border border-light-grey whitespace-nowrap" 

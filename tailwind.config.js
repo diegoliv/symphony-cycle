@@ -13,7 +13,8 @@ module.exports = {
       white: "#ffffff",
       light: "#FAFAFA",
       "light-grey": "#EDEDEF",
-      green: "#2F9D72"
+      green: "#2F9D72",
+      transparent: "transparent",
     },
     extend: {
       fontFamily: {

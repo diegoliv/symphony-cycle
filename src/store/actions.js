@@ -109,5 +109,32 @@ export default {
           reject(error)
         })
     })
+  },
+
+  updateBuilding({ state, commit }) {
+    return new Promise((resolve, reject) => {
+      const token = state.token;
+      const building = state.currentBuilding;
+
+      if (!token) {
+        reject("No token found");
+      }
+
+      api({
+        method: "post",
+        data: building,
+        url: `/building/${building.id}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          commit('refreshBuilding', response.data.building);
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }

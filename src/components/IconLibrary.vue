@@ -3,6 +3,7 @@
     <icon-account />
     <icon-billing />
     <icon-building />
+    <icon-chevron-down />
     <icon-close />
     <icon-energy />
     <icon-edit />
@@ -17,6 +18,7 @@
 import IconAccount from '@/components/Icons/IconAccount'
 import IconBilling from '@/components/Icons/IconBilling'
 import IconBuilding from '@/components/Icons/IconBuilding'
+import IconChevronDown from '@/components/Icons/IconChevronDown'
 import IconClose from '@/components/Icons/IconClose'
 import IconEnergy from '@/components/Icons/IconEnergy'
 import IconEdit from '@/components/Icons/IconEdit'
@@ -32,6 +34,7 @@ export default {
     IconBilling,
     IconBuilding,
     IconClose,
+    IconChevronDown,
     IconEnergy,
     IconEdit,
     IconHome,
